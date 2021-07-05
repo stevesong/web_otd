@@ -1,0 +1,11 @@
+{
+"type": "FeatureCollection",
+"name": "power_66kV_ke",
+"features": [
+{ "type": "Feature", "properties": { "COUNTRY": "KEN", "CNTRY_NAME": "KENYA", "VOLTAGE_KV": 66, "FROM_NM": "NAIROBI", "TO_NM": "KIAMBU", "STATUS": "Existing", "SOURCES": "WB map archive IBRD #33090; May 2004", "PROJECT_NM": null }, "geometry": { "type": "MultiLineString", "coordinates": [ [ [ 36.803470845859238, -1.280800426389739 ], [ 36.724185943603473, -1.265580892562831 ], [ 36.600318908691378, -1.139839649200432 ] ], [ [ 36.816665649414077, -1.283333301544154 ], [ 36.803470845859238, -1.280800426389739 ] ] ] } },
+{ "type": "Feature", "properties": { "COUNTRY": "KEN", "CNTRY_NAME": "KENYA", "VOLTAGE_KV": 66, "FROM_NM": "NAIROBI", "TO_NM": "NGONG", "STATUS": "Existing", "SOURCES": "WB map archive IBRD #33090; May 2004", "PROJECT_NM": null }, "geometry": { "type": "MultiLineString", "coordinates": [ [ [ 36.816665649414077, -1.283333301544154 ], [ 36.802537098377059, -1.295889416268103 ] ], [ [ 36.802537098377059, -1.295889416268103 ], [ 36.737415381901741, -1.353763414878713 ], [ 36.650001525878864, -1.366666674613981 ] ] ] } },
+{ "type": "Feature", "properties": { "COUNTRY": "KEN", "CNTRY_NAME": "KENYA", "VOLTAGE_KV": 66, "FROM_NM": "NAIROBI", "TO_NM": "MACHAKOS", "STATUS": "Existing", "SOURCES": "WB map archive IBRD #33090; May 2004", "PROJECT_NM": null }, "geometry": { "type": "MultiLineString", "coordinates": [ [ [ 36.816665649414077, -1.283333301544154 ], [ 37.266666412353501, -1.516666650772081 ] ] ] } },
+{ "type": "Feature", "properties": { "COUNTRY": "KEN", "CNTRY_NAME": "KENYA", "VOLTAGE_KV": 66, "FROM_NM": "NAIROBI", "TO_NM": "TANA", "STATUS": "Existing", "SOURCES": "WB map archive IBRD #33090; May 2004", "PROJECT_NM": null }, "geometry": { "type": "MultiLineString", "coordinates": [ [ [ 36.816665649414077, -1.283333301544154 ], [ 37.270000457763643, -0.779999971389778 ] ] ] } },
+{ "type": "Feature", "properties": { "COUNTRY": "KEN", "CNTRY_NAME": "KENYA", "VOLTAGE_KV": 66, "FROM_NM": "NAIROBI", "TO_NM": "WANJII", "STATUS": "Existing", "SOURCES": "WB map archive IBRD #33090; May 2004", "PROJECT_NM": null }, "geometry": { "type": "MultiLineString", "coordinates": [ [ [ 36.816665649414077, -1.283333301544154 ], [ 37.200000762939425, -0.699999988079099 ] ] ] } }
+]
+}

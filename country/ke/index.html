@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22256%22 height=%22256%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%233737ff%22></rect><path fill=%22%23fff%22 d=%22M17.10 25.27L17.10 25.27L25.87 25.27Q33.21 25.27 33.21 32.23L33.21 32.23L33.21 67.78Q33.21 74.73 25.87 74.73L25.87 74.73L17.10 74.73Q9.67 74.73 9.67 67.78L9.67 67.78L9.67 32.23Q9.67 25.27 17.10 25.27ZM26.10 66.67L26.10 66.67L26.10 33.33Q26.10 31.91 25.63 31.47Q25.15 31.04 23.73 31.04L23.73 31.04L19.15 31.04Q17.73 31.04 17.29 31.47Q16.86 31.91 16.86 33.33L16.86 33.33L16.86 66.67Q16.86 68.09 17.29 68.53Q17.73 68.96 19.15 68.96L19.15 68.96L23.73 68.96Q25.15 68.96 25.63 68.53Q26.10 68.09 26.10 66.67ZM37.40 25.27L61.10 25.27L61.10 31.04L52.80 31.04L52.80 74.73L45.69 74.73L45.69 31.04L37.40 31.04L37.40 25.27ZM65.76 74.73L65.76 25.27L82.98 25.27Q90.33 25.27 90.33 32.23L90.33 32.23L90.33 67.78Q90.33 74.73 82.98 74.73L82.98 74.73L65.76 74.73ZM83.14 66.83L83.14 66.83L83.14 33.17Q83.14 31.75 82.67 31.32Q82.19 30.88 80.77 30.88L80.77 30.88L72.95 30.88L72.95 69.12L80.77 69.12Q82.19 69.12 82.67 68.68Q83.14 68.25 83.14 66.83Z%22></path></svg>" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaflet Tutorial</title>
+    <!-- leaflet css  -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="../css/leaflet.groupedlayercontrol.min.css" />
+    <style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    #map {
+        width: 100%;
+        height: 100vh;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="map">
+        <div class="leaflet-control"></div>
+    </div>
+</body>
+
+</html>
+<!-- leaflet js  -->
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script src="../js/leaflet.groupedlayercontrol.min.js"></script>
+<script src="../js/leaflet.polylineDecorator.js"></script>
+<script src="../js/leaflet.ajax.min.js"></script>
+<script>
+// Map initialization 
+var map = L.map("map").setView([0.4840261862968292, 37.79567905048477], 7);
+
+
+
+
+/*==============================================
+            TILE LAYER 
+================================================*/
+//osm layer
+var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+});
+osm.addTo(map);
+// map.addLayer(osm)
+
+// water color 
+var watercolor = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
+    attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    subdomains: 'abcd',
+    minZoom: 1,
+    maxZoom: 16,
+    ext: 'jpg'
+});
+// watercolor.addTo(map)
+
+// dark map 
+var dark = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    subdomains: 'abcd',
+    maxZoom: 19
+});
+// dark.addTo(map)
+
+// google street 
+googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+    maxZoom: 20,
+    subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+});
+// googleStreets.addTo(map);
+
+//google satellite
+googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+    maxZoom: 20,
+    subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+});
+// googleSat.addTo(map)
+
+var wms = L.tileLayer.wms("http://localhost:8080/geoserver/wms", {
+    layers: 'geoapp:admin',
+    format: 'image/png',
+    transparent: true,
+    attribution: "wms test"
+});
+
+
+/*==============================================
+              FIBRE OVERLAYS
+================================================*/
+
+
+var liquidFibre = new L.GeoJSON.AJAX("fibre/liquid-ke.geojson");
+
+var liquidFibrePops = new L.GeoJSON.AJAX("fibre/liquid-pops-ke.geojson", {
+    pointToLayer: function(geoJsonPoint, latlng) {
+        return L.marker(latlng, { icon: liquidIcon }); 
+    },
+    onEachFeature: function(feature, layer) {
+        layer.bindPopup(feature.properties.Name);
+    }
+});
+
+var liquidGroup = L.layerGroup([liquidFibre, liquidFibrePops]);
+liquidGroup.addTo(map);
+
+var nofbiStyle = {
+    "color": "#ff7800",
+    "weight": 5,
+    "opacity": 0.65
+};
+
+var nofbiFibre = new L.GeoJSON.AJAX("fibre/NOFBI-ke.geojson", {
+    onEachFeature: function(feature, layer) {
+        layer.bindPopup(feature.properties.phase_name);
+    },
+    style: nofbiStyle
+});
+
+var nofbiFibrePops = new L.GeoJSON.AJAX("fibre/NOFBI-pops-ke.geojson", {
+    pointToLayer: function(geoJsonPoint, latlng) {
+        return L.marker(latlng, { icon: nofbiIcon }); 
+    },
+    onEachFeature: function(feature, layer) {
+        layer.bindPopup(feature.properties.Name);
+    }
+});
+
+
+var nofbiGroup = L.layerGroup([nofbiFibre, nofbiFibrePops]);
+nofbiGroup.addTo(map);
+
+
+var jamiiStyle = {
+    "color": "#007800",
+    "weight": 5,
+    "opacity": 0.65
+};
+
+var jamiiFibre = new L.GeoJSON.AJAX("fibre/jamii-ke.geojson", {
+    style: jamiiStyle
+});
+
+var jamiiFibrePops = new L.GeoJSON.AJAX("fibre/jamii-pops-ke.geojson", {
+    pointToLayer: function(geoJsonPoint, latlng) {
+        return L.marker(latlng, { icon: jamiiIcon }); 
+    },
+    onEachFeature: function(feature, layer) {
+        layer.bindPopup(feature.properties.Name);
+    }
+});
+
+var jamiiGroup = L.layerGroup([jamiiFibre, jamiiFibrePops]);
+jamiiGroup.addTo(map);
+
+
+/*==============================================
+    ENERGY INFRASTRUCTURE OVERLAYS
+================================================*/
+
+var kv330Style = {
+    "color": "#000FF0",
+    "weight": 6,
+    "opacity": 0.65
+};
+var kv220Style = {
+    "color": "#000FF0",
+    "weight": 4,
+    "opacity": 0.65
+};
+var kv132Style = {
+    "color": "#000FF0",
+    "weight": 3,
+    "opacity": 0.65
+};
+var kv66Style = {
+    "color": "#000FF0",
+    "weight": 2,
+    "opacity": 0.65
+};
+var kv33Style = {
+    "color": "#000FF0",
+    "weight": 1,
+    "opacity": 0.65
+};
+var kv330 = new L.GeoJSON.AJAX("power/power_330kV_ke.geojson",  {
+    onEachFeature: function(feature, layer) {
+        layer.bindPopup(feature.properties.FROM_NM);
+    },
+    style: kv330Style
+});
+var decorator = L.polylineDecorator(kv330, {
+    patterns: [
+        // defines a pattern of 10px-wide dashes, repeated every 20px on the line
+        {offset: 0, repeat: 20, symbol: L.Symbol.dash({pixelSize: 10})}
+    ]
+}).addTo(map);
+
+var kv220 = new L.GeoJSON.AJAX("power/power_220kV_ke.geojson", {
+    onEachFeature: function(feature, layer) {
+        layer.bindPopup(feature.properties.FROM_NM);
+    },
+    style: kv330Style
+});
+var kv132 = new L.GeoJSON.AJAX("power/power_132kV_ke.geojson", {
+    onEachFeature: function(feature, layer) {
+        layer.bindPopup(feature.properties.FROM_NM);
+    },
+    style: kv330Style
+});
+var kv66 = new L.GeoJSON.AJAX("power/power_66kV_ke.geojson", {
+    onEachFeature: function(feature, layer) {
+        layer.bindPopup(feature.properties.FROM_NM);
+    },
+    style: kv330Style
+});
+var kv33 = new L.GeoJSON.AJAX("power/power_33kV_ke.geojson", {
+    onEachFeature: function(feature, layer) {
+        layer.bindPopup(feature.properties.FROM_NM);
+    },
+    style: kv330Style
+});
+
+
+/*==============================================
+    OTHER INFRASTRUCTURE OVERLAYS
+================================================*/
+
+var railStyle = {
+    color: 'black',
+    weight: '2',
+    dashArray: '5, 5',
+    dashOffset: '0'
+};
+
+var kenyaRail = new L.GeoJSON.AJAX("rail/rail-ke.geojson", {
+    style: railStyle
+});
+
+/*==============================================
+                    CNs
+================================================*/
+var kenyaCN = new L.GeoJSON.AJAX("Kenya_CNs.geojson", {
+    onEachFeature: function(feature, layer) {
+        layer.bindPopup(feature.properties.Name);
+    },
+    style: {
+        fillColor: 'red',
+        fillOpacity: 1,
+        color: '#c0c0c0',
+    }
+});
+kenyaCN.on('data:loaded', function() {
+    console.log("CN loaded");
+    kenyaCN.addTo(map);
+});
+
+
+/*==============================================
+                LAYER CONTROL
+================================================*/
+var baseMaps = {
+    "OSM": osm,
+    "Water color map": watercolor,
+    "Dark": dark,
+    "Google Street": googleStreets,
+    "Google Satellite": googleSat
+};
+
+var overlayMaps = {
+    "Jamii Telecommunication Ltd": jamiiGroup,
+    "Liquid Intelligent Technologies": liquidGroup,
+    "National Optical Fibre Backbone (NOFBI)": nofbiGroup,
+    "Community Networks": kenyaCN
+};
+
+var groupedOverlays = {
+  "Fibre Networks": {
+    "Jamii Telecommunication Ltd": jamiiGroup,
+    "Liquid Intelligent Technologies": liquidGroup,
+    "National Optical Fibre Backbone (NOFBI)": nofbiGroup
+  },
+  "Railways": {
+    "Kenya Rail": kenyaRail
+  },
+  "Power": {
+    "330kV": kv330,
+    "220kV": kv220,
+    "132kV": kv132,
+    "66kV": kv66,
+    "33kV": kv33
+  },
+  "Points of Interest": {
+    "Community Networks": kenyaCN
+  }
+};
+
+L.control.groupedLayers(baseMaps, groupedOverlays, { collapsed: false }).addTo(map);
+
+/*L.control.layers(baseMaps, overlayMaps, { collapsed: true }).addTo(map);*/
+
+/*==============================================
+                PoP Icon
+    todo: resize https://github.com/john-kilgo/L.Marker.AutoResizeSVG
+================================================*/
+
+var nofbiIcon = L.icon({
+    iconUrl: '../img/router_gold.png',
+    className: "pop-icon",
+    iconSize: [22, 15],
+    iconAnchor: [11, 15],
+});
+var liquidIcon = L.icon({
+    iconUrl: '../img/router_blue.png',
+    className: "pop-icon",
+    iconSize: [22, 15],
+    iconAnchor: [11, 15],
+});
+var jamiiIcon = L.icon({
+    iconUrl: '../img/router_green.png',
+    className: "pop-icon",
+    iconSize: [22, 15],
+    iconAnchor: [11, 15],
+});
+</script>

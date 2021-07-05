@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "power_330kV_ke",
+"features": [
+{ "type": "Feature", "properties": { "COUNTRY": "KEN", "CNTRY_NAME": "KENYA", "VOLTAGE_KV": 330, "FROM_NM": "Arusha", "TO_NM": "Nairobi", "STATUS": "Under Study", "SOURCES": null, "PROJECT_NM": "Zambia-Tanzania-Kenya Interconnector" }, "geometry": { "type": "MultiLineString", "coordinates": [ [ [ 36.727592438419094, -2.506965469604495 ], [ 36.804126739502067, -1.270201444625798 ] ] ] } },
+{ "type": "Feature", "properties": { "COUNTRY": "KEN", "CNTRY_NAME": "KENYA", "VOLTAGE_KV": 330, "FROM_NM": "Longonot", "TO_NM": "Ethiopian border", "STATUS": "Under Study", "SOURCES": "Wb project document: P108921", "PROJECT_NM": "Kenya-Ethiopia Interconnector" }, "geometry": { "type": "MultiLineString", "coordinates": [ [ [ 38.422381092776696, 3.613250828596106 ], [ 38.260696804863855, 3.331014174515201 ], [ 37.641341923773865, 1.583583409454314 ], [ 37.066665649414034, 0.01666669920084 ], [ 36.355106955962448, 0.041355692008375 ], [ 36.816665649414062, -1.283333301544189 ] ] ] } }
+]
+}

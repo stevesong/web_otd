@@ -1,0 +1,16 @@
+{
+"type": "FeatureCollection",
+"name": "jamii-pops-ke",
+"features": [
+{ "type": "Feature", "properties": { "Latitude": 0.5142066, "Longitude": 35.2853253, "Name": "Eldoret", "Country": "Kenya", "iso2": "ke", "Network": "JTL", "Network ID": null }, "geometry": { "type": "Point", "coordinates": [ 35.2853253, 0.5142066 ] } },
+{ "type": "Feature", "properties": { "Latitude": -0.1029109, "Longitude": 34.7541761, "Name": "Kisumu", "Country": "Kenya", "iso2": "ke", "Network": "JTL", "Network ID": null }, "geometry": { "type": "Point", "coordinates": [ 34.7541761, -0.1029109 ] } },
+{ "type": "Feature", "properties": { "Latitude": 0.63595530862198502, "Longitude": 34.276761319377698, "Name": "Malaba", "Country": "Kenya", "iso2": "ke", "Network": "JTL", "Network ID": null }, "geometry": { "type": "Point", "coordinates": [ 34.276761319377698, 0.635955308621985 ] } },
+{ "type": "Feature", "properties": { "Latitude": -4.0390146, "Longitude": 39.648390961856997, "Name": "Mombasa", "Country": "Kenya", "iso2": "ke", "Network": "JTL", "Network ID": null }, "geometry": { "type": "Point", "coordinates": [ 39.648390961856997, -4.0390146 ] } },
+{ "type": "Feature", "properties": { "Latitude": -1.2832533, "Longitude": 36.8172449, "Name": "Nairobi", "Country": "Kenya", "iso2": "ke", "Network": "JTL", "Network ID": null }, "geometry": { "type": "Point", "coordinates": [ 36.8172449, -1.2832533 ] } },
+{ "type": "Feature", "properties": { "Latitude": -0.30535436112703701, "Longitude": 36.086161220320299, "Name": "Nakuru", "Country": "Kenya", "iso2": "ke", "Network": "JTL", "Network ID": null }, "geometry": { "type": "Point", "coordinates": [ 36.086161220320299, -0.305354361127037 ] } },
+{ "type": "Feature", "properties": { "Latitude": -2.5461733, "Longitude": 36.7915635, "Name": "Namanga", "Country": "Kenya", "iso2": "ke", "Network": "JTL", "Network ID": null }, "geometry": { "type": "Point", "coordinates": [ 36.7915635, -2.5461733 ] } },
+{ "type": "Feature", "properties": { "Latitude": -0.41933537927048897, "Longitude": 36.950583901241302, "Name": "Nyeri", "Country": "Kenya", "iso2": "ke", "Network": "JTL", "Network ID": null }, "geometry": { "type": "Point", "coordinates": [ 36.950583901241302, -0.419335379270489 ] } },
+{ "type": "Feature", "properties": { "Latitude": -1.036648, "Longitude": 37.077523, "Name": "Thika", "Country": "Kenya", "iso2": "ke", "Network": "JTL", "Network ID": null }, "geometry": { "type": "Point", "coordinates": [ 37.077523, -1.036648 ] } },
+{ "type": "Feature", "properties": { "Latitude": -3.3976842, "Longitude": 38.584327, "Name": "Voi", "Country": "Kenya", "iso2": "ke", "Network": "JTL", "Network ID": null }, "geometry": { "type": "Point", "coordinates": [ 38.584327, -3.3976842 ] } }
+]
+}

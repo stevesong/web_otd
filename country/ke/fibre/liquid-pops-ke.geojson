@@ -1,0 +1,19 @@
+{
+"type": "FeatureCollection",
+"name": "liquid-pops-ke",
+"features": [
+{ "type": "Feature", "properties": { "Latitude": 0.56985554546802497, "Longitude": 34.560055164482598, "Name": "Bungoma", "Country": "Kenya", "iso2": "ke", "Network": "Liquid Telecom", "Network ID": null }, "geometry": { "type": "Point", "coordinates": [ 34.560055164482598, 0.569855545468025 ] } },
+{ "type": "Feature", "properties": { "Latitude": 0.46007462531400201, "Longitude": 34.111435323088699, "Name": "Busia", "Country": "Kenya", "iso2": "ke", "Network": "Liquid Telecom", "Network ID": null }, "geometry": { "type": "Point", "coordinates": [ 34.111435323088699, 0.460074625314002 ] } },
+{ "type": "Feature", "properties": { "Latitude": 0.5142066, "Longitude": 35.2853253, "Name": "Eldoret", "Country": "Kenya", "iso2": "ke", "Network": "Liquid Telecom", "Network ID": null }, "geometry": { "type": "Point", "coordinates": [ 35.2853253, 0.5142066 ] } },
+{ "type": "Feature", "properties": { "Latitude": -0.48523175338851399, "Longitude": 39.6295076601833, "Name": "Garissa", "Country": "Kenya", "iso2": "ke", "Network": "Liquid Telecom", "Network ID": null }, "geometry": { "type": "Point", "coordinates": [ 39.6295076601833, -0.485231753388514 ] } },
+{ "type": "Feature", "properties": { "Latitude": -0.1029109, "Longitude": 34.7541761, "Name": "Kisumu", "Country": "Kenya", "iso2": "ke", "Network": "Liquid Telecom", "Network ID": null }, "geometry": { "type": "Point", "coordinates": [ 34.7541761, -0.1029109 ] } },
+{ "type": "Feature", "properties": { "Latitude": -2.2846737, "Longitude": 40.8640335, "Name": "Lamu", "Country": "Kenya", "iso2": "ke", "Network": "Liquid Telecom", "Network ID": null }, "geometry": { "type": "Point", "coordinates": [ 40.8640335, -2.2846737 ] } },
+{ "type": "Feature", "properties": { "Latitude": 0.4002038, "Longitude": 40.9520422, "Name": "Liboi", "Country": "Kenya", "iso2": "ke", "Network": "Liquid Telecom", "Network ID": null }, "geometry": { "type": "Point", "coordinates": [ 40.9520422, 0.4002038 ] } },
+{ "type": "Feature", "properties": { "Latitude": -3.2165987, "Longitude": 40.1165933, "Name": "Malindi", "Country": "Kenya", "iso2": "ke", "Network": "Liquid Telecom", "Network ID": null }, "geometry": { "type": "Point", "coordinates": [ 40.1165933, -3.2165987 ] } },
+{ "type": "Feature", "properties": { "Latitude": 0.056779295648690997, "Longitude": 37.6405235441051, "Name": "Meru", "Country": "Kenya", "iso2": "ke", "Network": "Liquid Telecom", "Network ID": null }, "geometry": { "type": "Point", "coordinates": [ 37.6405235441051, 0.056779295648691 ] } },
+{ "type": "Feature", "properties": { "Latitude": 3.5166891, "Longitude": 39.0562603, "Name": "Moyale", "Country": "Kenya", "iso2": "ke", "Network": "Liquid Telecom", "Network ID": null }, "geometry": { "type": "Point", "coordinates": [ 39.0562603, 3.5166891 ] } },
+{ "type": "Feature", "properties": { "Latitude": -1.2832533, "Longitude": 36.8172449, "Name": "Nairobi", "Country": "Kenya", "iso2": "ke", "Network": "Liquid Telecom", "Network ID": null }, "geometry": { "type": "Point", "coordinates": [ 36.8172449, -1.2832533 ] } },
+{ "type": "Feature", "properties": { "Latitude": -0.30623331169433299, "Longitude": 36.0775705592891, "Name": "Nakuru", "Country": "Kenya", "iso2": "ke", "Network": "Liquid Telecom", "Network ID": null }, "geometry": { "type": "Point", "coordinates": [ 36.0775705592891, -0.306233311694333 ] } },
+{ "type": "Feature", "properties": { "Latitude": -1.036648, "Longitude": 37.077523, "Name": "Thika", "Country": "Kenya", "iso2": "ke", "Network": "Liquid Telecom", "Network ID": null }, "geometry": { "type": "Point", "coordinates": [ 37.077523, -1.036648 ] } }
+]
+}

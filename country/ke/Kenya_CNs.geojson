@@ -1,0 +1,10 @@
+{
+"type": "FeatureCollection",
+"name": "Kenya_CNs",
+"features": [
+{ "type": "Feature", "properties": { "Name": "Lanet Nakuru - Lanet Secondary School", "Latitude": -0.290409, "Longitude": 36.149571, "Plus Code": "P45X+RV Nakuru, Kenya" }, "geometry": { "type": "Point", "coordinates": [ 36.149571, -0.290409 ] } },
+{ "type": "Feature", "properties": { "Name": "Kilifi - Dunia Moja Network & Lamuka Hub", "Latitude": -3.5774444, "Longitude": 39.867306, "Plus Code": "CVF8+2W Kilifi, Kenya" }, "geometry": { "type": "Point", "coordinates": [ 39.867306, -3.5774444 ] } },
+{ "type": "Feature", "properties": { "Name": "Tunapanda, Kibera", "Latitude": -1.312869, "Longitude": 36.778664, "Plus Code": "MQPH+VC Nairobi, Kenya" }, "geometry": { "type": "Point", "coordinates": [ 36.778664, -1.312869 ] } },
+{ "type": "Feature", "properties": { "Name": "Nyalenda Kisumu - AHERI", "Latitude": -0.117106, "Longitude": 34.759412, "Plus Code": "VQM5+4Q Kisumu, Kenya" }, "geometry": { "type": "Point", "coordinates": [ 34.759412, -0.117106 ] } }
+]
+}
