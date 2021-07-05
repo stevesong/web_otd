@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22256%22 height=%22256%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%233737ff%22></rect><path fill=%22%23fff%22 d=%22M17.10 25.27L17.10 25.27L25.87 25.27Q33.21 25.27 33.21 32.23L33.21 32.23L33.21 67.78Q33.21 74.73 25.87 74.73L25.87 74.73L17.10 74.73Q9.67 74.73 9.67 67.78L9.67 67.78L9.67 32.23Q9.67 25.27 17.10 25.27ZM26.10 66.67L26.10 66.67L26.10 33.33Q26.10 31.91 25.63 31.47Q25.15 31.04 23.73 31.04L23.73 31.04L19.15 31.04Q17.73 31.04 17.29 31.47Q16.86 31.91 16.86 33.33L16.86 33.33L16.86 66.67Q16.86 68.09 17.29 68.53Q17.73 68.96 19.15 68.96L19.15 68.96L23.73 68.96Q25.15 68.96 25.63 68.53Q26.10 68.09 26.10 66.67ZM37.40 25.27L61.10 25.27L61.10 31.04L52.80 31.04L52.80 74.73L45.69 74.73L45.69 31.04L37.40 31.04L37.40 25.27ZM65.76 74.73L65.76 25.27L82.98 25.27Q90.33 25.27 90.33 32.23L90.33 32.23L90.33 67.78Q90.33 74.73 82.98 74.73L82.98 74.73L65.76 74.73ZM83.14 66.83L83.14 66.83L83.14 33.17Q83.14 31.75 82.67 31.32Q82.19 30.88 80.77 30.88L80.77 30.88L72.95 30.88L72.95 69.12L80.77 69.12Q82.19 69.12 82.67 68.68Q83.14 68.25 83.14 66.83Z%22></path></svg>" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leaflet Tutorial</title>
+    <title>Open Telecom Data demonstration - Kenya</title>
     <!-- leaflet css  -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <link rel="stylesheet" href="../css/leaflet.groupedlayercontrol.min.css" />
+    <link rel="stylesheet" href="../css/iconLayers.css" />
     <style>
     body {
         margin: 0;
@@ -33,6 +33,7 @@
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 <script src="../js/leaflet.groupedlayercontrol.min.js"></script>
 <script src="../js/leaflet.polylineDecorator.js"></script>
+<script src="../js/leaflet.iconLayers.js"></script>
 <script src="../js/leaflet.ajax.min.js"></script>
 <script>
 // Map initialization 
@@ -103,7 +104,7 @@ var liquidFibrePops = new L.GeoJSON.AJAX("fibre/liquid-pops-ke.geojson", {
         return L.marker(latlng, { icon: liquidIcon }); 
     },
     onEachFeature: function(feature, layer) {
-        layer.bindPopup(feature.properties.Name);
+        layer.bindPopup("Liquid PoP: " + feature.properties.Name);
     }
 });
 
@@ -128,7 +129,7 @@ var nofbiFibrePops = new L.GeoJSON.AJAX("fibre/NOFBI-pops-ke.geojson", {
         return L.marker(latlng, { icon: nofbiIcon }); 
     },
     onEachFeature: function(feature, layer) {
-        layer.bindPopup(feature.properties.Name);
+        layer.bindPopup("NOFBI PoP: " + feature.properties.Name);
     }
 });
 
@@ -136,6 +137,57 @@ var nofbiFibrePops = new L.GeoJSON.AJAX("fibre/NOFBI-pops-ke.geojson", {
 var nofbiGroup = L.layerGroup([nofbiFibre, nofbiFibrePops]);
 nofbiGroup.addTo(map);
 
+
+var kplcStyle = {
+    "color": "#00337f",
+    "weight": 5,
+    "opacity": 0.65
+};
+
+var kplcFibre = new L.GeoJSON.AJAX("fibre/KPLC_fibre.geojson", {
+    onEachFeature: function(feature, layer) {
+        layer.bindPopup("KPLC");
+    },
+    style: kplcStyle
+});
+
+var kplcSubstations = new L.GeoJSON.AJAX("fibre/KPLC_SubStations.geojson", {
+    pointToLayer: function(geoJsonPoint, latlng) {
+        return L.marker(latlng, { icon: kplcIcon }); 
+    },
+    onEachFeature: function(feature, layer) {
+        layer.bindPopup("KPLC substation: " + feature.properties.Location);
+    }
+});
+
+var kplcGroup = L.layerGroup([kplcFibre, kplcSubstations]);
+kplcGroup.addTo(map);
+
+
+var ketracoStyle = {
+    "color": "#63b136",
+    "weight": 5,
+    "opacity": 0.65
+};
+
+var ketracoFibre = new L.GeoJSON.AJAX("fibre/KETRACO_fibre.geojson", {
+    onEachFeature: function(feature, layer) {
+        layer.bindPopup("KETRACO");
+    },
+    style: ketracoStyle
+});
+
+var ketracoSubstations = new L.GeoJSON.AJAX("fibre/KETRACO_SubStations.geojson", {
+    pointToLayer: function(geoJsonPoint, latlng) {
+        return L.marker(latlng, { icon: ketracoIcon }); 
+    },
+    onEachFeature: function(feature, layer) {
+        layer.bindPopup("KETRACO Substation: " + feature.properties.Name);
+    }
+});
+
+var ketracoGroup = L.layerGroup([ketracoFibre, ketracoSubstations]);
+ketracoGroup.addTo(map);
 
 var jamiiStyle = {
     "color": "#007800",
@@ -152,7 +204,7 @@ var jamiiFibrePops = new L.GeoJSON.AJAX("fibre/jamii-pops-ke.geojson", {
         return L.marker(latlng, { icon: jamiiIcon }); 
     },
     onEachFeature: function(feature, layer) {
-        layer.bindPopup(feature.properties.Name);
+        layer.bindPopup("JTL PoP: " + feature.properties.Name);
     }
 });
 
@@ -273,21 +325,15 @@ var baseMaps = {
     "Google Satellite": googleSat
 };
 
-var overlayMaps = {
-    "Jamii Telecommunication Ltd": jamiiGroup,
-    "Liquid Intelligent Technologies": liquidGroup,
-    "National Optical Fibre Backbone (NOFBI)": nofbiGroup,
-    "Community Networks": kenyaCN
-};
-
 var groupedOverlays = {
   "Fibre Networks": {
     "Jamii Telecommunication Ltd": jamiiGroup,
     "Liquid Intelligent Technologies": liquidGroup,
     "National Optical Fibre Backbone (NOFBI)": nofbiGroup
   },
-  "Railways": {
-    "Kenya Rail": kenyaRail
+  "OGW Fibre": {
+    "KETRACO": ketracoGroup,
+    "KPLC": kplcGroup
   },
   "Power": {
     "330kV": kv330,
@@ -295,6 +341,9 @@ var groupedOverlays = {
     "132kV": kv132,
     "66kV": kv66,
     "33kV": kv33
+  },
+  "Railways": {
+    "Kenya Rail": kenyaRail
   },
   "Points of Interest": {
     "Community Networks": kenyaCN
@@ -325,6 +374,18 @@ var liquidIcon = L.icon({
 var jamiiIcon = L.icon({
     iconUrl: '../img/router_green.png',
     className: "pop-icon",
+    iconSize: [22, 15],
+    iconAnchor: [11, 15],
+});
+var ketracoIcon = L.icon({
+    iconUrl: '../img/ketraco-ss-icon.png',
+    className: "substation-icon",
+    iconSize: [22, 15],
+    iconAnchor: [11, 15],
+});
+var kplcIcon = L.icon({
+    iconUrl: '../img/kplc-ss-icon.png',
+    className: "substation-icon",
     iconSize: [22, 15],
     iconAnchor: [11, 15],
 });
