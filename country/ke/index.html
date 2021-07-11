@@ -37,6 +37,7 @@
 </html>
 <!-- leaflet js  -->
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script src="../js/leaflet-svg-shape-markers.min.js"></script>
 <script src="../js/leaflet.groupedlayercontrol.js"></script>
 <script src="../js/leaflet.polylineDecorator.js"></script>
 <script src="../js/iconLayers.js"></script>
@@ -121,29 +122,47 @@
     fillOpacity: 0,
   };
   var countryOutline = new L.GeoJSON.AJAX("kenya_country.geojson", {
-    style: countryStyle
+    style: countryStyle,
   });
   countryOutline.addTo(map);
 
   var countyOutline = new L.GeoJSON.AJAX("kenya_counties.geojson", {
-    style: countyStyle
+    style: countyStyle,
   });
   var subcountyOutline = new L.GeoJSON.AJAX("kenya_subcounties.geojson", {
-    style: subcountyStyle
+    style: subcountyStyle,
   });
 
   /*==============================================
                 FIBRE OVERLAYS
   ================================================*/
+  var liquidStyle = {
+    color: "#366da7",
+    weight: 5,
+    opacity: 0.65,
+  };
 
-  var liquidFibre = new L.GeoJSON.AJAX("fibre/liquid-ke.geojson");
+  var liquidFibre = new L.GeoJSON.AJAX("fibre/liquid-ke.geojson", {
+    onEachFeature: function (feature, layer) {
+      layer.bindTooltip("Liquid Intelligent Technologies");
+    },
+    style: liquidStyle,
+  });
 
   var liquidFibrePops = new L.GeoJSON.AJAX("fibre/liquid-pops-ke.geojson", {
     pointToLayer: function (geoJsonPoint, latlng) {
-      return L.marker(latlng, { icon: liquidIcon });
+      return L.shapeMarker(latlng, {
+        shape: "circle",
+        radius: 6,
+        fillColor: "#366da7",
+        fillOpacity: "1",
+        color: "#ffffff",
+        opacity: "1",
+        weight: "1"
+      });
     },
     onEachFeature: function (feature, layer) {
-      layer.bindPopup("Liquid PoP: " + feature.properties.Name);
+      layer.bindTooltip(feature.properties.Name);
     },
   });
 
@@ -151,49 +170,102 @@
   liquidGroup.addTo(map);
 
   var nofbiStyle = {
-    color: "#ff7800",
+    color: "#009e7c",
     weight: 5,
     opacity: 0.65,
   };
 
   var nofbiFibre = new L.GeoJSON.AJAX("fibre/NOFBI-ke.geojson", {
     onEachFeature: function (feature, layer) {
-      layer.bindPopup(feature.properties.phase_name);
+      layer.bindTooltip("NOFBI");
     },
     style: nofbiStyle,
   });
 
   var nofbiFibrePops = new L.GeoJSON.AJAX("fibre/NOFBI-pops-ke.geojson", {
     pointToLayer: function (geoJsonPoint, latlng) {
-      return L.marker(latlng, { icon: nofbiIcon });
+      return L.shapeMarker(latlng, {
+        shape: "circle",
+        radius: 6,
+        fillColor: "#009e7c",
+        fillOpacity: "1",
+        color: "#ffffff",
+        opacity: "1",
+        weight: "1"
+      });
     },
     onEachFeature: function (feature, layer) {
-      layer.bindPopup("NOFBI PoP: " + feature.properties.Name);
+      layer.bindTooltip("NOFBI PoP: " + feature.properties.Name);
     },
   });
 
   var nofbiGroup = L.layerGroup([nofbiFibre, nofbiFibrePops]);
   nofbiGroup.addTo(map);
 
+  var jamiiStyle = {
+    color: "#934125",
+    weight: 5,
+    opacity: 0.65,
+  };
+
+  var jamiiFibre = new L.GeoJSON.AJAX("fibre/jamii-ke.geojson", {
+    onEachFeature: function (feature, layer) {
+      layer.bindTooltip("JTL");
+    },
+    style: jamiiStyle,
+  });
+
+  var jamiiFibrePops = new L.GeoJSON.AJAX("fibre/jamii-pops-ke.geojson", {
+    pointToLayer: function (geoJsonPoint, latlng) {
+      return L.shapeMarker(latlng, {
+        shape: "circle",
+        radius: 6,
+        fillColor: "#934125",
+        fillOpacity: "1",
+        color: "#ffffff",
+        opacity: "1",
+        weight: "1"
+      });
+    },
+    onEachFeature: function (feature, layer) {
+      layer.bindTooltip("JTL PoP: " + feature.properties.Name);
+    },
+  });
+
+  var jamiiGroup = L.layerGroup([jamiiFibre, jamiiFibrePops]);
+  jamiiGroup.addTo(map);
+
+  /*==============================================
+            OGW FIBRE OVERLAYS
+================================================*/
+
   var kplcStyle = {
-    color: "#00337f",
+    color: "#d3622b",
     weight: 5,
     opacity: 0.65,
   };
 
   var kplcFibre = new L.GeoJSON.AJAX("fibre/KPLC_fibre.geojson", {
     onEachFeature: function (feature, layer) {
-      layer.bindPopup("KPLC");
+      layer.bindTooltip("KPLC");
     },
     style: kplcStyle,
   });
 
   var kplcSubstations = new L.GeoJSON.AJAX("fibre/KPLC_SubStations.geojson", {
     pointToLayer: function (geoJsonPoint, latlng) {
-      return L.marker(latlng, { icon: kplcIcon });
+      return L.shapeMarker(latlng, {
+        shape: "square",
+        radius: 5,
+        fillColor: "#d3622b",
+        fillOpacity: "1",
+        color: "#ffffff",
+        opacity: "1",
+        weight: "1"
+      });
     },
     onEachFeature: function (feature, layer) {
-      layer.bindPopup("KPLC substation: " + feature.properties.Location);
+      layer.bindTooltip("KPLC substation: " + feature.properties.Location);
     },
   });
 
@@ -201,14 +273,14 @@
   kplcGroup.addTo(map);
 
   var ketracoStyle = {
-    color: "#63b136",
+    color: "#6b457f",
     weight: 5,
     opacity: 0.65,
   };
 
   var ketracoFibre = new L.GeoJSON.AJAX("fibre/KETRACO_fibre.geojson", {
     onEachFeature: function (feature, layer) {
-      layer.bindPopup("KETRACO");
+      layer.bindTooltip("KETRACO");
     },
     style: ketracoStyle,
   });
@@ -217,10 +289,18 @@
     "fibre/KETRACO_SubStations.geojson",
     {
       pointToLayer: function (geoJsonPoint, latlng) {
-        return L.marker(latlng, { icon: ketracoIcon });
+        return L.shapeMarker(latlng, {
+          shape: "square",
+          radius: 5,
+          fillColor: "#6b457f",
+          fillOpacity: "1",
+          color: "#ffffff",
+          opacity: "1",
+          weight: "1"
+        });
       },
       onEachFeature: function (feature, layer) {
-        layer.bindPopup("KETRACO Substation: " + feature.properties.Name);
+        layer.bindTooltip("KETRACO Substation: " + feature.properties.Name);
       },
     }
   );
@@ -228,70 +308,42 @@
   var ketracoGroup = L.layerGroup([ketracoFibre, ketracoSubstations]);
   ketracoGroup.addTo(map);
 
-  var jamiiStyle = {
-    color: "#007800",
-    weight: 5,
-    opacity: 0.65,
-  };
-
-  var jamiiFibre = new L.GeoJSON.AJAX("fibre/jamii-ke.geojson", {
-    style: jamiiStyle,
-  });
-
-  var jamiiFibrePops = new L.GeoJSON.AJAX("fibre/jamii-pops-ke.geojson", {
-    pointToLayer: function (geoJsonPoint, latlng) {
-      return L.marker(latlng, { icon: jamiiIcon });
-    },
-    onEachFeature: function (feature, layer) {
-      layer.bindPopup("JTL PoP: " + feature.properties.Name);
-    },
-  });
-
-  var jamiiGroup = L.layerGroup([jamiiFibre, jamiiFibrePops]);
-  jamiiGroup.addTo(map);
-
   /*==============================================
       ENERGY INFRASTRUCTURE OVERLAYS
   ================================================*/
 
   var kv330Style = {
-    color: "#000FF0",
-    weight: 6,
-    opacity: 0.65,
+    color: "#fff200",
+    weight: "8",
+    opacity: 1
   };
   var kv220Style = {
-    color: "#000FF0",
-    weight: 4,
-    opacity: 0.65,
+    color: "#fff200",
+    weight: "4",
+    opacity: 1,
   };
   var kv132Style = {
-    color: "#000FF0",
-    weight: 3,
-    opacity: 0.65,
+    color: "#fff200",
+    weight: "2",
+    opacity: 1,
   };
   var kv66Style = {
-    color: "#000FF0",
-    weight: 2,
-    opacity: 0.65,
+    color: "#fff200",
+    weight: "1",
+    opacity: 1,
   };
   var kv33Style = {
-    color: "#000FF0",
-    weight: 1,
-    opacity: 0.65,
+    color: "#fff200",
+    weight: "1",
+    opacity: 1,
   };
   var kv330 = new L.GeoJSON.AJAX("power/power_330kV_ke.geojson", {
     onEachFeature: function (feature, layer) {
-      layer.bindPopup(feature.properties.FROM_NM);
+      layer.bindPopup(feature.properties.FROM_NM),
+      layer.bindTooltip(feature.properties.FROM_NM);
     },
     style: kv330Style,
   });
-  var decorator = L.polylineDecorator(kv330, {
-    patterns: [
-      // defines a pattern of 10px-wide dashes, repeated every 20px on the line
-      { offset: 0, repeat: 20, symbol: L.Symbol.dash({ pixelSize: 10 }) },
-    ],
-  }).addTo(map);
-
   var kv220 = new L.GeoJSON.AJAX("power/power_220kV_ke.geojson", {
     onEachFeature: function (feature, layer) {
       layer.bindPopup(feature.properties.FROM_NM);
@@ -336,17 +388,24 @@
                       CNs
   ================================================*/
   var cnIcon = L.icon({
-    iconUrl: '../img/cn-icon.svg',
-    iconSize: [30,30]
+    iconUrl: "../img/cn-icon.svg",
+    iconSize: [30, 30],
   });
-  
+
   var kenyaCN = new L.GeoJSON.AJAX("Kenya_CNs.geojson", {
     onEachFeature: function (feature, layer) {
-      layer.bindPopup("Community Network:\n" + feature.properties.Name);
+      layer.bindTooltip("Community Network:\n" + feature.properties.Name);
     },
     pointToLayer: function (feature, latlng) {
-      return L.marker(latlng, {icon: cnIcon});
-    }
+      return L.shapeMarker(latlng, {
+        shape: "x",
+        radius: 12,
+        fillColor: "#000000",
+        fillOpacity: "1",
+        color: "#ff0000",
+        opacity: "1",
+      });
+    },
   });
   kenyaCN.on("data:loaded", function () {
     console.log("CN loaded");
@@ -393,9 +452,7 @@
     },
   };
 
-  L.control
-    .groupedLayers("",groupedOverlays, { collapsed: false })
-    .addTo(map);
+  L.control.groupedLayers("", groupedOverlays, { collapsed: false }).addTo(map);
 
   /*==============================================
               ICON LAYER CONTROL
